@@ -6,14 +6,9 @@
 #include "User.hpp"
 #include "Book.hpp"
 
-class Admin : public User , public Book {
+class Admin : public User {
     public:
     Admin() = default;
 
-    void addUser(const std::string& name, const std::string& email, const std::string& role);
-    void addBooks();
-    void deleteBooks();
-    void editBooks();
-    void generateFine();
-    void viewIssueLogs();
+
 };

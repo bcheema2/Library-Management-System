@@ -6,13 +6,10 @@
 #include "User.hpp"
 
 class Student : public User {
+    std::string studentID;
     public:
     Student() = default;
+    Student(std::string username, std::string name, std::string email, Role r, std::string ID);
 
-    void searchCatalog();
-    void checkoutBooks();
-    void returnBooks();
-    void renewItems();
-    void fineStatus();
-
+    int borrowLimit() const override;
 };
