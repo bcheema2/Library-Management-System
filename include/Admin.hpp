@@ -8,7 +8,11 @@
 
 class Admin : public User {
     public:
-    Admin() = default;
+    Admin() {
+        setBorrow(30);
+    }
+    Admin(const std::string& username, const std::string& name, const std::string& email);
 
-
+    [[nodiscard]] int borrowLimit() const override;
 };
+

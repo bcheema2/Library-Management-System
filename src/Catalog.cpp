@@ -7,7 +7,7 @@
 #include <vector>
 #include <iostream>
 
-void Catalog:: findBook(Book& book, std::string& name) const {
+void Catalog:: findBook(Book& book,const std::string& name) const {
     if (shelf.contains(name)) {
         book.setAvailable(true);
         std:: cout << "Book is available\n";

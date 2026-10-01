@@ -17,6 +17,7 @@ class User {
     std::string name;
     std::string email;
     Role role;
+    int borrow = 0;
 
     public:
     User() = default;
@@ -32,7 +33,11 @@ class User {
     [[nodiscard]]std::string getUsername() const noexcept {return username;};
     [[nodiscard]]std::string getName() const noexcept {return name;};
     [[nodiscard]]std::string getEmail() const noexcept {return email;};
+    [[nodiscard]] int getBorrow() const noexcept {return borrow;};
 
+    void setBorrow(int value) {
+        borrow = value;
+    }
     [[nodiscard]] virtual int borrowLimit() const = 0;
 };
 

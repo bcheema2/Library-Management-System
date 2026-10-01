@@ -7,9 +7,14 @@
 
 class Student : public User {
     std::string studentID;
+    double outstandingFines;
     public:
-    Student() = default;
-    Student(std::string username, std::string name, std::string email, Role r, std::string ID);
+    Student() {
+        setBorrow(5);
+    }
+    Student(std::string username, std::string name, std::string email, Role r, std::string ID, double fines);
 
-    int borrowLimit() const override;
+    [[nodiscard]] int borrowLimit() const override;
 };
+
+
