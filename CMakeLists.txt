@@ -8,6 +8,7 @@ add_executable(Library_Management_System main.cpp
         src/Student.cpp
         src/Admin.cpp
         include/Transaction.hpp
+        src/Transaction.cpp
 )
 
 target_include_directories(Library_Management_System PRIVATE include)
