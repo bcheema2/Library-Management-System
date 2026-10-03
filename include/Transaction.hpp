@@ -24,7 +24,8 @@ class Transaction {
     Transaction() = default;
 
     Transaction( std::string transactionID, const User& user, const Book& book);
-    void bookIssued(std::chrono::system_clock::time_point issueDate);
+
+    double getFineAmount(const User& user);
 };
 
 
