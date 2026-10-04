@@ -9,15 +9,23 @@
 #include <memory>
 #include "User.hpp"
 #include "Book.hpp"
+#include "Transaction.hpp"
 
 class Catalog {
+    //for O(1) search of books
+    std::unordered_map<std::string, std::unique_ptr<Book>> bookByISBN;
 
-    std::unordered_map<std::string,std::shared_ptr<Book>> shelf;
-    std::unordered_map<std::string,std::vector<std::string>> categories;
+    std::unordered_map<std::string, std::unique_ptr<User>> userByUsername;
+
+    std::unordered_map< std::string, std::vector<std::string>> authorIndex;
+
+    std::vector<Transaction> transactions;
 
     public:
     Catalog() = default;
-
-    void addUser(User& user, std::string& username,std::string& name, std::string& email, User::Role role);
-    void findBook(Book& book,const std::string& name) const;
+    ~Catalog() = default;
+    void addBook(std::unique_ptr<Book> books);
+    void removeBook(const std::string& isbn);
+    std::vector<Book> searchByTitle(const std::string& Title);
+    std::vector<Book> searchByAuthor(const std::string& Author);
 };

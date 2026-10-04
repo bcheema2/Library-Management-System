@@ -2,18 +2,15 @@
 // Created by Bibenpreet Cheema on 9/30/26.
 //
 #include "Catalog.hpp"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <iostream>
-
-void Catalog:: findBook(Book& book,const std::string& name) const {
-    if (shelf.contains(name)) {
-        book.setAvailable(true);
-        std:: cout << "Book is available\n";
+#include <fmt/core.h>
+#include <print>
+void Catalog::addBook(std::unique_ptr<Book> books) {
+    if (books) {
+        std::string isbn = books->getISBN();
+        bookByISBN.emplace(std::move(isbn), std::move(books));
+        fmt::print("Successfully added book: {}\n", isbn);
     }
-    else {
-        book.setAvailable(false);
-        std:: cout << "Book is unavailable\n";
-    }
+    fmt::print("Failed to add book: {}. Book already exists.\n",books->getISBN());
 }
+
+
