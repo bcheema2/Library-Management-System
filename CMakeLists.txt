@@ -1,7 +1,13 @@
-cmake_minimum_required(VERSION 4.3)
+cmake_minimum_required(VERSION 3.20)
 project(Library_Management_System)
 
 set(CMAKE_CXX_STANDARD 23)
+
+if(APPLE)
+    list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew")
+endif()
+
+find_package(fmt REQUIRED)
 
 add_executable(Library_Management_System main.cpp
         src/Catalog.cpp
@@ -13,6 +19,6 @@ add_executable(Library_Management_System main.cpp
 
 target_include_directories(Library_Management_System PRIVATE
         include
-        /opt/homebrew/include
 )
-target_link_libraries(Library_Management_System PRIVATE fmt)
+
+target_link_libraries(Library_Management_System PRIVATE fmt::fmt)

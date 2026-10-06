@@ -24,8 +24,8 @@ class Catalog {
     public:
     Catalog() = default;
     ~Catalog() = default;
-    void addBook(std::unique_ptr<Book> books);
+    void addBook(std::unique_ptr<Book> book);
     void removeBook(const std::string& isbn);
-    std::vector<Book> searchByTitle(const std::string& Title);
-    std::vector<Book> searchByAuthor(const std::string& Author);
+    [[nodiscard]] std::vector<const Book*> searchByTitle(const std::string& title) const;
+    [[nodiscard]] std::vector<const Book*> searchByAuthor(const std::string& author) const;
 };
