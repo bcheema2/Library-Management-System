@@ -15,11 +15,11 @@ class Catalog {
     //for O(1) search of books
     std::unordered_map<std::string, std::unique_ptr<Book>> bookByISBN;
 
-    std::unordered_map<std::string, std::unique_ptr<User>> userByUsername;
+    std::unordered_map<std::string, std::shared_ptr<User>> userByUsername;
 
     std::unordered_map< std::string, std::vector<std::string>> authorIndex;
 
-    std::vector<Transaction> transactions;
+    std::vector<Transaction> activeTransactions;
 
     public:
     Catalog() = default;
@@ -28,4 +28,10 @@ class Catalog {
     void removeBook(const std::string& isbn);
     [[nodiscard]] std::vector<const Book*> searchByTitle(const std::string& title) const;
     [[nodiscard]] std::vector<const Book*> searchByAuthor(const std::string& author) const;
+
+    bool registerUser(std::unique_ptr<User> user);
+    [[nodiscard]] std::shared_ptr<User> authenticateUser(const std::string& username) const;
+
+    bool issueBook(const std::string& username, const std::string& isbn);
+    bool returnBook(const std::string& username, const std::string& isbn);
 };

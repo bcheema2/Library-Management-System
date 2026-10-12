@@ -30,12 +30,12 @@ class User {
     virtual ~User() = default;
 
     //Getters
-    [[nodiscard]]std::string getUsername() const noexcept {return username;};
-    [[nodiscard]]std::string getName() const noexcept {return name;};
-    [[nodiscard]]std::string getEmail() const noexcept {return email;};
+    [[nodiscard]] const std::string& getUsername() const noexcept {return username;};
+    [[nodiscard]] const std::string& getName() const noexcept {return name;};
+    [[nodiscard]] const std::string& getEmail() const noexcept {return email;};
     [[nodiscard]] int getBorrow() const noexcept {return borrow;};
 
-    void setBorrow(int value) {
+    void setBorrow(const int value) {
         borrow = value;
     }
     [[nodiscard]] virtual int borrowLimit() const = 0;

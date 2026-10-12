@@ -25,7 +25,12 @@ class Transaction {
 
     Transaction( std::string transactionID, const User& user, const Book& book);
 
-    double getFineAmount(const User& user);
+
+    [[nodiscard]] const std::string& getUsername() const noexcept {return username;}
+    [[nodiscard]] const std::string& getISBN() const noexcept {return ISBN;}
+    [[nodiscard]] bool getReturned() const noexcept {return isReturned;}
+
+    double getFineAmount();
 };
 
 

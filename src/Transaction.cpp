@@ -11,9 +11,10 @@ Transaction::Transaction(std::string transactionID, const User& user, const Book
             dueDate(issueDate + std::chrono::days(user.borrowLimit())),
             isReturned(false)  {}
 
-double Transaction::getFineAmount(const User& user) {
-    if (isReturned == false && (dueDate - issueDate > std::chrono::days(user.borrowLimit()))) {
-        const auto duration = std::chrono::duration_cast<std::chrono::days>(dueDate - issueDate);
+double Transaction::getFineAmount() {
+    auto now = std::chrono::system_clock::now();
+    if (isReturned == false && now > dueDate) {
+        const auto duration = std::chrono::duration_cast<std::chrono::days>(now - dueDate);
         fineAmount = duration.count() * 5.00;
     }
     return fineAmount ;

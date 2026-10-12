@@ -23,7 +23,7 @@ class Book {
             author{std::move(author)},
             category{std::move(category)}
             {
-                // Converting to lower case for search quesries
+                // Converting to lower case for search queries
                 normalizedTitle = bookName;
                 std::ranges::transform(normalizedTitle, normalizedTitle.begin(),
                 [] (const unsigned char c) {return std::tolower(c);});
@@ -34,16 +34,16 @@ class Book {
             }
 
 
-    [[nodiscard]] std::string getBookName() const noexcept {return bookName;}
-    [[nodiscard]] std::string getISBN() const noexcept {return ISBN;}
-    [[nodiscard]] std::string getAuthor() const noexcept {return author;}
-    [[nodiscard]] std::string getCategory() const noexcept {return category;}
-    [[nodiscard]] std::string getNormalizedTitle() const noexcept {return normalizedTitle;}
-    [[nodiscard]] std::string getNormalizedAuthor() const noexcept {return normalizedAuthor;}
+    [[nodiscard]] const std::string& getBookName() const noexcept {return bookName;}
+    [[nodiscard]] const std::string& getISBN() const noexcept {return ISBN;}
+    [[nodiscard]] const std::string& getAuthor() const noexcept {return author;}
+    [[nodiscard]] const std::string& getCategory() const noexcept {return category;}
+    [[nodiscard]] const std::string& getNormalizedTitle() const noexcept {return normalizedTitle;}
+    [[nodiscard]] const std::string& getNormalizedAuthor() const noexcept {return normalizedAuthor;}
     bool available() const noexcept {return isAvailable;};
 
     //Setter
-    void setAvailable(bool status) {
+    void setAvailable(const bool status) {
         isAvailable = status;
     }
 
