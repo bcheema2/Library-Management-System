@@ -150,15 +150,31 @@ bool Catalog::issueBook(const std::string &username, const std::string &isbn) {
 }
 
 bool Catalog::returnBook(const std::string &username, const std::string &isbn) {
-
-    for (const auto& tx : activeTransactions) {
+    Transaction* TX = nullptr;
+    for (auto& tx : activeTransactions) {
         if (tx.getUsername() == username && tx.getISBN() == isbn && tx.getReturned() == false) {
-            fmt::print("Transaction ID found");
-        }
-        else {
-            fmt::print("Transaction ID not found");
-            return false;
+            TX = &tx;
+            break;
         }
     }
-    
+    if (TX == nullptr) {
+        fmt::print("Transaction ID not found");
+        return false;
+    }
+    fmt::print("Transaction ID found");
+
+    double fine = TX->getFineAmount();
+    if (fine != 0.0) {
+        fmt::print("Fine Amount: {}\n", fine);
+    }
+    TX->setReturned(true);
+
+    auto itb = bookByISBN.find(isbn);
+    if (itb != bookByISBN.end()) {
+        itb->second->setAvailable(true);
+        fmt::print("Book {} has been marked available and returned by {}\n", isbn, username);
+    }
+    return true;
 }
+
+

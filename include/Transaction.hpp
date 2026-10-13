@@ -29,6 +29,10 @@ class Transaction {
     [[nodiscard]] const std::string& getUsername() const noexcept {return username;}
     [[nodiscard]] const std::string& getISBN() const noexcept {return ISBN;}
     [[nodiscard]] bool getReturned() const noexcept {return isReturned;}
+    bool setReturned(bool status) {
+        isReturned = status;
+        return status;
+    }
 
     double getFineAmount();
 };
