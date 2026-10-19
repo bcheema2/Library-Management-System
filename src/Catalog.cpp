@@ -4,6 +4,26 @@
 #include "Catalog.hpp"
 #include <fmt/core.h>
 #include <ranges>
+#include <StorageManager.hpp>
+
+Catalog::Catalog(std::string bFile, std::string uFile) :
+            bookFile(std::move(bFile)),
+            userFile(std::move(uFile)) {
+
+    StorageManager::loadBook(bookByISBN);
+    StorageManager::loadUsers(userByUsername);
+
+    if (userByUsername.empty()) {
+        auto defaultAdmin = std::make_shared<Admin>("admin", "System Admin", "admin@library.com", User::Role::Admin);
+        userByUsername["admin"] = defaultAdmin;
+        fmt::print("No users found. Created default admin ('admin') for bootstrapping.\n");
+    }
+}
+
+Catalog::~Catalog() {
+    StorageManager::saveBook(bookByISBN);
+    StorageManager::saveUsers(userByUsername);
+}
 
 void Catalog::addBook(std::unique_ptr<Book> book) {
     if (!book) {

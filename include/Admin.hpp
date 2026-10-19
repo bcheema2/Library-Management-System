@@ -11,7 +11,7 @@ class Admin : public User {
     Admin() {
         setBorrow(30);
     }
-    Admin(const std::string& username, const std::string& name, const std::string& email);
+    Admin(const std::string& username, const std::string& name, const std::string& email, Role r);
 
     [[nodiscard]] int borrowLimit() const override;
 };

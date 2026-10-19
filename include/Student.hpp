@@ -12,6 +12,7 @@ class Student : public User {
     Student() {
         setBorrow(5);
     }
+    Student(const std::string& username, const std::string& name, const std::string& email, Role r);
     Student(std::string username, std::string name, std::string email, Role r, std::string ID, double fines);
 
     [[nodiscard]] int borrowLimit() const override;

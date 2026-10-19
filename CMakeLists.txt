@@ -15,6 +15,10 @@ add_executable(Library_Management_System main.cpp
         src/Admin.cpp
         include/Transaction.hpp
         src/Transaction.cpp
+        include/StorageManager.hpp
+        src/StorageManager.cpp
+        include/CLI.hpp
+        src/CLI.cpp
 )
 
 target_include_directories(Library_Management_System PRIVATE

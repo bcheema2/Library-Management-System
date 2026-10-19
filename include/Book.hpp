@@ -7,30 +7,31 @@
 #include <string>
 
 class Book {
-    std::string bookName;
     std::string ISBN;
     std::string author;
+    std::string bookName;
     std::string category;
+    bool isAvailable = false;
     std::string normalizedTitle;
     std::string normalizedAuthor;
-    bool isAvailable = false;
 
     public:
     Book() = default;
-    Book(std::string bookName, std::string ISBN, std::string author, std::string category) :
+    Book( std::string isbn, std::string auth, std::string bookName, std::string category, bool isAvailable) :
+            ISBN{std::move(isbn)},
+            author{std::move(auth)},
             bookName{std::move(bookName)},
-            ISBN{std::move(ISBN)},
-            author{std::move(author)},
-            category{std::move(category)}
+            category{std::move(category)},
+            isAvailable{isAvailable}
             {
                 // Converting to lower case for search queries
                 normalizedTitle = bookName;
                 std::ranges::transform(normalizedTitle, normalizedTitle.begin(),
-                [] (const unsigned char c) {return std::tolower(c);});
+                [] (const unsigned char c) {return static_cast<char>(std::tolower(c));});
 
-                normalizedAuthor = author;
+                normalizedAuthor = auth;
                 std::ranges::transform(normalizedAuthor, normalizedAuthor.begin(),
-                [] (const unsigned char c) {return std::tolower(c);});
+                [] (const unsigned char c) {return static_cast<char>(std::tolower(c));});
             }
 
 
@@ -40,7 +41,7 @@ class Book {
     [[nodiscard]] const std::string& getCategory() const noexcept {return category;}
     [[nodiscard]] const std::string& getNormalizedTitle() const noexcept {return normalizedTitle;}
     [[nodiscard]] const std::string& getNormalizedAuthor() const noexcept {return normalizedAuthor;}
-    bool available() const noexcept {return isAvailable;};
+    [[nodiscard]] bool available() const noexcept {return isAvailable;};
 
     //Setter
     void setAvailable(const bool status) {

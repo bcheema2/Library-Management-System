@@ -21,9 +21,16 @@ class Catalog {
 
     std::vector<Transaction> activeTransactions;
 
+    // Filenames for load state and save state
+
+    std::string bookFile;
+    std::string userFile;
+
     public:
-    Catalog() = default;
-    ~Catalog() = default;
+    Catalog(std::string bFile = "books.txt", std::string uFile = "users.txt");
+
+    ~Catalog();
+
     void addBook(std::unique_ptr<Book> book);
     void removeBook(const std::string& isbn);
     [[nodiscard]] std::vector<const Book*> searchByTitle(const std::string& title) const;

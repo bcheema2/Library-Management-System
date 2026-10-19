@@ -5,11 +5,11 @@
 #include "Admin.hpp"
 
 
-Admin::Admin(const std::string& username, const std::string& name, const std::string& email):
+Admin::Admin(const std::string& username, const std::string& name, const std::string& email, Role r):
         User{username,
-     name,
-     email,
-      Role::Admin} {}
+             name,
+             email,
+              Role::Admin} {}
 
 int Admin::borrowLimit() const {
     return getBorrow();

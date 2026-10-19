@@ -34,6 +34,7 @@ class User {
     [[nodiscard]] const std::string& getName() const noexcept {return name;};
     [[nodiscard]] const std::string& getEmail() const noexcept {return email;};
     [[nodiscard]] int getBorrow() const noexcept {return borrow;};
+    [[nodiscard]] Role getRole() const noexcept {return role;};
 
     void setBorrow(const int value) {
         borrow = value;
