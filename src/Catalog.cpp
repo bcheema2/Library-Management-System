@@ -6,12 +6,14 @@
 #include <ranges>
 #include <StorageManager.hpp>
 
-Catalog::Catalog(std::string bFile, std::string uFile) :
+Catalog::Catalog(std::string bFile, std::string uFile,std::string tFile)  :
             bookFile(std::move(bFile)),
-            userFile(std::move(uFile)) {
+            userFile(std::move(uFile)),
+            transactionFile(std::move(tFile)) {
 
     StorageManager::loadBook(bookByISBN);
     StorageManager::loadUsers(userByUsername);
+    StorageManager::loadTransaction(activeTransactions);
 
     if (userByUsername.empty()) {
         auto defaultAdmin = std::make_shared<Admin>("admin", "System Admin", "admin@library.com", User::Role::Admin);
@@ -23,6 +25,7 @@ Catalog::Catalog(std::string bFile, std::string uFile) :
 Catalog::~Catalog() {
     StorageManager::saveBook(bookByISBN);
     StorageManager::saveUsers(userByUsername);
+    StorageManager::saveTransaction(activeTransactions);
 }
 
 void Catalog::addBook(std::unique_ptr<Book> book) {
@@ -163,8 +166,7 @@ bool Catalog::issueBook(const std::string &username, const std::string &isbn) {
     fmt::print("Book {} is issued to {}\n",isbn,username);
     itb->second->setAvailable(false);
 
-    std::string txId = "TXN" + username + " " + isbn;
-    Transaction newTX (txId, *user,*itb->second);
+    Transaction newTX (*user,*itb->second);
     activeTransactions.push_back(newTX);
     return true;
 }

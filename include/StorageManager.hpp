@@ -19,4 +19,8 @@ class StorageManager {
   static void saveUsers(std::unordered_map<std::string, std::shared_ptr<User>>& users);
 
   static void loadUsers(std::unordered_map<std::string, std::shared_ptr<User>>& users);
+
+  static void saveTransaction(std::vector<Transaction>& transactions);
+
+  static void loadTransaction(std::vector<Transaction>& transactions);
 };

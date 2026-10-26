@@ -25,9 +25,11 @@ class Catalog {
 
     std::string bookFile;
     std::string userFile;
+    std::string transactionFile;
 
     public:
-    Catalog(std::string bFile = "books.txt", std::string uFile = "users.txt");
+    //Load state
+    Catalog(std::string bFile = "books.txt", std::string uFile = "users.txt", std::string tFile = "transactions.txt");
 
     ~Catalog();
 
